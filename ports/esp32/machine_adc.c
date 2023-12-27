@@ -147,12 +147,14 @@ static void mp_machine_adc_print(const mp_print_t *print, mp_obj_t self_in, mp_p
     mp_printf(print, "ADC(Pin(%u), atten=%u)", self->gpio_id, madc_atten_get(self));
 }
 
-static void madc_atten_helper(const machine_adc_obj_t *self, mp_int_t atten) {
-    esp_err_t err;
+STATIC void madc_atten_helper(const machine_adc_obj_t *self, mp_int_t atten) {
+    esp_err_t err = ESP_OK;
     if (self->block->unit_id == ADC_UNIT_1) {
         err = adc1_config_channel_atten(self->channel_id, atten);
     } else {
+        #if (SOC_ADC_PERIPH_NUM >= 2)
         err = adc2_config_channel_atten(self->channel_id, atten);
+        #endif
     }
     if (err != ESP_OK) {
         mp_raise_ValueError(MP_ERROR_TEXT("invalid atten"));
