@@ -31,7 +31,6 @@
 #include <sys/time.h>
 // #include "soc/rtc_cntl_reg.h"
 #include "driver/gpio.h"
-#include "driver/adc.h"
 #include "esp_heap_caps.h"
 #include "multi_heap.h"
 
@@ -140,13 +139,19 @@ static MP_DEFINE_CONST_FUN_OBJ_1(esp32_wake_on_ulp_obj, esp32_wake_on_ulp);
 
 static mp_obj_t esp32_gpio_deep_sleep_hold(const mp_obj_t enable) {
     if (mp_obj_is_true(enable)) {
+        #if !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
         gpio_deep_sleep_hold_en();
+        #endif
     } else {
+        #if !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
         gpio_deep_sleep_hold_dis();
+        #endif
     }
     return mp_const_none;
 }
+#if !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
 static MP_DEFINE_CONST_FUN_OBJ_1(esp32_gpio_deep_sleep_hold_obj, esp32_gpio_deep_sleep_hold);
+#endif
 
 #if CONFIG_IDF_TARGET_ESP32
 

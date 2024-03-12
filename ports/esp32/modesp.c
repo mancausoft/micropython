@@ -35,6 +35,7 @@
 #include "py/runtime.h"
 #include "py/mperrno.h"
 #include "py/mphal.h"
+#include "driver/gpio.h"
 
 static mp_obj_t esp_osdebug(size_t n_args, const mp_obj_t *args) {
     esp_log_level_t level = LOG_LOCAL_LEVEL; // Maximum available level
