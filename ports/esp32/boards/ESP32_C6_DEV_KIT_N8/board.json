@@ -1,0 +1,20 @@
+{
+    "deploy": [
+        "../deploy_c6.md"
+    ],
+    "docs": "",
+    "features": [
+        "BLE",
+        "WiFi",
+        "RGB LED"
+    ],
+    "id": "esp32c6devkitn8",
+    "images": [
+        "esp32c6_devkitmini.jpg"
+    ],
+    "mcu": "esp32c6",
+    "product": "ESP32-C6-DEV-KIT-N8",
+    "thumbnail": "",
+    "url": "https://www.waveshare.com/wiki/ESP32-C6-DEV-KIT-N8",
+    "vendor": "Waveshare"
+}
